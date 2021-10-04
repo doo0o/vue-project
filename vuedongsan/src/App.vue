@@ -7,20 +7,12 @@
         <Discount/>
 
         <!-- MODAL POPUP -->
-        <Modal :productData = "productData" :proIndex = "proIndex" :modal_status = "modal_status" />
+        <Modal @closeModal="modal_status= false" :productData = "productData" :proIndex = "proIndex" :modal_status = "modal_status" />
         <!-- //MODAL POPUP -->
        
         <!-- Contents -->
-        <Card :productData = "productData" :proIndex = "proIndex" :modal_status = "modal_status"/>
+        <Card @openModal="modal_status=true;proIndex = $event" :productData="productData[i]" :modal_status="modal_status" v-for="(datalength,i) in productData" :key="datalength" />
         <!-- //Contents -->
-
-        <!-- BackUp -->
-        <!-- <div v-for="(dataP,i) in productData" :key="i">
-            <img :src="productData[i].image" alt="" class="room-img">
-            <h4 @click="modal_status = true;proIndex = i;">{{productData[i].title}}</h4>
-            <p>{{productData[i].price}} 만원</p>
-        </div> -->
-        <!-- //BackUp -->
     </div>
 </template>
 
@@ -35,6 +27,7 @@ export default{
     name : 'app',
     data(){
         return{
+            object : {name : 'jeong' , age : '27'},
             proIndex : 0,
             productData : data,
             modal_status : false,
@@ -42,9 +35,9 @@ export default{
         }
     },
     components: {
-        Discount,
-        Modal,
-        Card,
+        Discount : Discount,
+        Modal : Modal,
+        Card : Card,
     }
 }
 </script>

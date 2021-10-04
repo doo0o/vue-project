@@ -1,8 +1,8 @@
 <template>
-    <div v-for="(dataP,i) in productData" :key="i">
-        <img :src="productData[i].image" alt="" class="room-img">
-        <h4>{{productData[i].title}}</h4>
-        <p>{{productData[i].price}} 만원</p>
+    <div>
+        <img :src="productData.image" alt="" class="room-img">
+        <h4 @click="factory();">{{productData.title}}</h4>
+        <p>{{productData.price}} 만원</p>
     </div>
 </template>
 
@@ -10,13 +10,18 @@
 export default {
     name : "Card",
     props : {
-        proIndex : Number,
+        // proIndex : Number,
         productData : Object,
         modal_status : Boolean,
-    }
+    },
+    methods: {
+        factory(){
+            this.$emit('openModal',this.productData.id)
+        }
+    },
 }
 </script>
 
 <style>
-
+ 
 </style>
