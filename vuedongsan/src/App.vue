@@ -1,52 +1,52 @@
-    <template>
+<template>
+    <div>
         <div class="menu">
-            <a href="javascript:;"  v-for="gnbFor in gnbArray" :key="gnbFor">{{gnbFor}}</a>
+                <a v-for="gnb in gnbList" :key="gnb">{{gnb}}</a>
         </div>
-        <div>
-            <h4>{{products[0]}}</h4>
-            <p>50만원</p>
-        </div>
-        <div>
-            <h4>{{products[1]}}</h4>
-            <p>50만원</p>
-        </div>
-        <div>
-            <h4>{{products[2]}}</h4>
-            <p>50만원</p>
-        </div>
-    </template>
 
-    <script>
+        <Discount/>
 
-    export default {
-    name: 'App',
+        <!-- MODAL POPUP -->
+        <Modal :productData = "productData" :proIndex = "proIndex" :modal_status = "modal_status" />
+        <!-- //MODAL POPUP -->
+       
+        <!-- Contents -->
+        <Card :productData = "productData" :proIndex = "proIndex" :modal_status = "modal_status"/>
+        <!-- //Contents -->
+
+        <!-- BackUp -->
+        <!-- <div v-for="(dataP,i) in productData" :key="i">
+            <img :src="productData[i].image" alt="" class="room-img">
+            <h4 @click="modal_status = true;proIndex = i;">{{productData[i].title}}</h4>
+            <p>{{productData[i].price}} 만원</p>
+        </div> -->
+        <!-- //BackUp -->
+    </div>
+</template>
+
+<script>
+
+import data from './assets/dataPro.js';
+import Discount from './assets/discount.vue';
+import Modal from './assets/modal.vue';
+import Card from './assets/card.vue';
+
+export default{
+    name : 'app',
     data(){
         return{
-        gnbArray : ['Home','Shop','About'],
-        products : ['역삼동원룸', '의정부원룸', '녹양동원룸'],
+            proIndex : 0,
+            productData : data,
+            modal_status : false,
+            gnbList : ['HOME','SHOP','ABOUT']
         }
     },
     components: {
+        Discount,
+        Modal,
+        Card,
     }
-    }
-    </script>
+}
+</script>
+<style src="./common.css"></style>
 
-    <style>
-    #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-    }
-    .menu {
-    background : darkslateblue;
-    padding : 15px;
-    border-radius : 5px;
-    }
-    .menu a {
-    color : white;
-    padding : 10px;
-    }
-    </style>
